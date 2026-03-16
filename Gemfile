@@ -60,6 +60,10 @@ group :development, :test do
   gem "rspec-rails"
   gem "kaminari"
   gem "devise"
+
+  # For debugging with binding.pry
+  gem "pry-rails"
+  gem "pry-byebug"
 end
 
 group :development do
