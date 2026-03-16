@@ -5,7 +5,12 @@ Rails.application.routes.draw do
   authenticated :user do
     root "dashboard#show", as: :authenticated_root
   end
-  root "devise/sessions#new"
+
+  resource :dashboard, only: [:show]
+
+  unauthenticated do
+    root "devise/sessions#new", as: :unauthenticated_root
+  end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
