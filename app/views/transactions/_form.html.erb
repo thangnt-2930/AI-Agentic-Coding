@@ -1,0 +1,40 @@
+<%= form_with(model: @transaction, local: true) do |form| %>
+  <% if @transaction.errors.any? %>
+    <div class="mb-4 text-red-600">
+      <ul>
+        <% @transaction.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-4">
+    <%= form.label :amount, class: "block font-bold mb-1" %>
+    <%= form.number_field :amount, step: 0.01, class: "w-full border rounded px-2 py-1" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :transacted_on, class: "block font-bold mb-1" %>
+    <%= form.date_field :transacted_on, class: "w-full border rounded px-2 py-1" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :transaction_type, class: "block font-bold mb-1" %>
+    <%= form.select :transaction_type, [["Income", "income"], ["Expense", "expense"]], {}, class: "w-full border rounded px-2 py-1" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :category_id, "Category", class: "block font-bold mb-1" %>
+    <%= form.collection_select :category_id, @categories, :id, :name, { include_blank: false }, class: "w-full border rounded px-2 py-1" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :note, class: "block font-bold mb-1" %>
+    <%= form.text_area :note, rows: 3, class: "w-full border rounded px-2 py-1" %>
+  </div>
+
+  <div>
+    <%= form.submit class: "bg-blue-500 text-white px-4 py-2 rounded" %>
+  </div>
+<% end %>

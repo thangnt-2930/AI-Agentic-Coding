@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_03_16_092533) do
+ActiveRecord::Schema[8.0].define(version: 2026_03_16_100255) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -21,6 +21,21 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_16_092533) do
     t.datetime "updated_at", null: false
     t.index ["user_id", "name"], name: "index_categories_on_user_id_and_name", unique: true
     t.index ["user_id"], name: "index_categories_on_user_id"
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "category_id", null: false
+    t.decimal "amount", precision: 15, scale: 2, null: false
+    t.string "transaction_type", null: false
+    t.date "transacted_on", null: false
+    t.text "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_transactions_on_category_id"
+    t.index ["transacted_on"], name: "index_transactions_on_transacted_on"
+    t.index ["user_id", "transacted_on"], name: "index_transactions_on_user_id_and_transacted_on"
+    t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -36,4 +51,6 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_16_092533) do
   end
 
   add_foreign_key "categories", "users"
+  add_foreign_key "transactions", "categories"
+  add_foreign_key "transactions", "users"
 end
