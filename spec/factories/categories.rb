@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :category do
-    user { nil }
-    name { 'MyString' }
+    association :user
+    sequence(:name) { |n| "Category #{n}" }
   end
 end
