@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   authenticated :user do
-    root 'dashboard#show', as: :authenticated_root
+    root 'dashboards#index', as: :authenticated_root
   end
 
   root to: redirect('/users/sign_in')
@@ -23,5 +23,5 @@ Rails.application.routes.draw do
   # root "posts#index"
   resources :categories
   resources :transactions
-  resource :dashboard, only: [:show]
+  resources :dashboards, only: [:index]
 end
