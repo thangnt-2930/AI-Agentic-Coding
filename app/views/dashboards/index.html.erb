@@ -1,4 +1,4 @@
-<h1 class="text-xl font-bold mb-4">Dashboard</h1>
+<h3 class="text-xl font-bold mb-4">Dashboard</h3>
 
 <div class="mb-6 flex gap-4">
   <%= link_to 'Today', dashboards_path(period: 'today'), class: "px-4 py-2 rounded #{'bg-indigo-600 text-white' if @period == 'today'} bg-gray-200" %>
@@ -6,40 +6,19 @@
   <%= link_to 'This Month', dashboards_path(period: 'this_month'), class: "px-4 py-2 rounded #{'bg-indigo-600 text-white' if @period == 'this_month'} bg-gray-200" %>
 </div>
 
-<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-  <div class="bg-green-100 p-4 rounded">
-    <div class="text-sm text-gray-600">Total Income</div>
-    <div class="text-2xl font-bold text-green-700"><%= number_to_currency(@total_income) %></div>
-  </div>
-  <div class="bg-red-100 p-4 rounded">
-    <div class="text-sm text-gray-600">Total Expense</div>
-    <div class="text-2xl font-bold text-red-700"><%= number_to_currency(@total_expense) %></div>
-  </div>
-  <div class="bg-blue-100 p-4 rounded">
-    <div class="text-sm text-gray-600">Net Balance</div>
-    <div class="text-2xl font-bold text-blue-700"><%= number_to_currency(@net_balance) %></div>
-  </div>
-</div>
-
-<h2 class="text-lg font-semibold mb-2">Category Expense Breakdown</h2>
-<table class="min-w-full border mb-4">
+<table class="min-w-full border border-black border-collapse mb-6 bg-white shadow rounded">
   <thead>
     <tr>
-      <th class="px-4 py-2 border">Category</th>
-      <th class="px-4 py-2 border">Expense</th>
+      <th class="px-4 py-2 border border-black">Total Income</th>
+      <th class="px-4 py-2 border border-black">Total Expense</th>
+      <th class="px-4 py-2 border border-black">Net Balance</th>
     </tr>
   </thead>
   <tbody>
-    <% @category_breakdown.each do |category, amount| %>
-      <tr>
-        <td class="px-4 py-2 border"><%= category %></td>
-        <td class="px-4 py-2 border"><%= number_to_currency(amount) %></td>
-      </tr>
-    <% end %>
-    <% if @category_breakdown.empty? %>
-      <tr>
-        <td colspan="2" class="px-4 py-2 border text-center text-gray-500">No expenses found for this period.</td>
-      </tr>
-    <% end %>
+    <tr>
+      <td class="px-4 py-2 border border-black text-green-700 text-xl font-bold"><%= number_to_currency(@total_income) %></td>
+      <td class="px-4 py-2 border border-black text-red-700 text-xl font-bold"><%= number_to_currency(@total_expense) %></td>
+      <td class="px-4 py-2 border border-black text-blue-700 text-xl font-bold"><%= number_to_currency(@net_balance) %></td>
+    </tr>
   </tbody>
 </table>
