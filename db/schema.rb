@@ -19,6 +19,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_16_092533) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id", "name"], name: "index_categories_on_user_id_and_name", unique: true
     t.index ["user_id"], name: "index_categories_on_user_id"
   end
 

@@ -1,0 +1,24 @@
+<h1 class="text-xl font-bold mb-4">Categories</h1>
+<% if flash[:alert] %>
+  <div class="mb-4 text-red-600"><%= flash[:alert] %></div>
+<% end %>
+<table class="w-full mb-4 border">
+  <thead>
+    <tr>
+      <th class="px-4 py-2 text-left">Name</th>
+      <th class="px-4 py-2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @categories.each do |category| %>
+      <tr>
+        <td class="px-4 py-2"><%= category.name %></td>
+        <td class="px-4 py-2">
+          <%= link_to 'Edit', edit_category_path(category), class: "text-blue-500 mr-2" %>
+          <%= link_to 'Delete', category_path(category), method: :delete, data: { confirm: 'Are you sure?' }, class: "text-red-500" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'New Category', new_category_path, class: "bg-blue-500 text-white px-4 py-2 rounded" %>

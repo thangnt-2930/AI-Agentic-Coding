@@ -69,16 +69,16 @@
 
 **Independent Test**: Create two categories → verify they appear in the list → rename one → confirm updated name → attempt to delete a category that has a transaction → confirm it is blocked.
 
-- [ ] T023 [US2] Run `bin/rails generate model Category user:references name:string` to create the model and migration
-- [ ] T024 [US2] If the generated `db/migrate/TIMESTAMP_create_categories.rb` is missing constraints or indexes, create a new migration to add `null: false` to `name`, ensure `t.references :user` has `null: false, foreign_key: true`, and add `add_index :categories, [:user_id, :name], unique: true`.
-- [ ] T025 [US2] Run `bin/rails db:migrate` to apply the categories migration
-- [ ] T026 [US2] Edit `app/models/category.rb` — add `has_many :transactions, dependent: :restrict_with_error`; add `validates :name, presence: true, uniqueness: { scope: :user_id, case_sensitive: false }`; add `scope :for_user, ->(user) { where(user: user) }` and `scope :ordered, -> { order(:name) }`
-- [ ] T027 [US2] Create `app/controllers/categories_controller.rb` — implement `index` (loads `current_user.categories.ordered`), `new`, `create`, `edit`, `update`, `destroy`; use `before_action :set_category, only: %i[edit update destroy]` where `set_category` does `current_user.categories.find(params[:id])`; in `destroy`, redirect with `alert` if the model has errors (from `restrict_with_error`); use private `category_params` with `permit(:name)`
-- [ ] T028 [US2] Edit `config/routes.rb` — add `resources :categories` inside the authenticated scope or at the top level (before the closing `end`)
-- [ ] T029 [US2] Create `app/views/categories/_form.html.erb` — a Tailwind form with a text input for `name` and a submit button; show `@category.errors.full_messages` at the top if any
-- [ ] T030 [US2] Create `app/views/categories/index.html.erb` — a Tailwind table listing each category name with Edit and Delete links; a "New Category" button; show the flash `alert` if present (for restrict_with_error feedback)
-- [ ] T031 [US2] Create `app/views/categories/new.html.erb` — page title "New Category" and render `form` partial
-- [ ] T032 [US2] Create `app/views/categories/edit.html.erb` — page title "Edit Category" and render `form` partial
+	- [X] T023 [US2] Run `bin/rails generate model Category user:references name:string` to create the model and migration
+	- [X] T024 [US2] If the generated `db/migrate/TIMESTAMP_create_categories.rb` is missing constraints or indexes, create a new migration to add `null: false` to `name`, ensure `t.references :user` has `null: false, foreign_key: true`, and add `add_index :categories, [:user_id, :name], unique: true`.
+	- [X] T025 [US2] Run `bin/rails db:migrate` to apply the categories migration
+	- [X] T026 [US2] Edit `app/models/category.rb` — add `has_many :transactions, dependent: :restrict_with_error`; add `validates :name, presence: true, uniqueness: { scope: :user_id, case_sensitive: false }`; add `scope :for_user, ->(user) { where(user: user) }` and `scope :ordered, -> { order(:name) }`
+	- [X] T027 [US2] Create `app/controllers/categories_controller.rb` — implement `index` (loads `current_user.categories.ordered`), `new`, `create`, `edit`, `update`, `destroy`; use `before_action :set_category, only: %i[edit update destroy]` where `set_category` does `current_user.categories.find(params[:id])`; in `destroy`, redirect with `alert` if the model has errors (from `restrict_with_error`); use private `category_params` with `permit(:name)`
+	- [X] T028 [US2] Edit `config/routes.rb` — add `resources :categories` inside the authenticated scope or at the top level (before the closing `end`)
+	- [X] T029 [US2] Create `app/views/categories/_form.html.erb` — a Tailwind form with a text input for `name` and a submit button; show `@category.errors.full_messages` at the top if any
+	- [X] T030 [US2] Create `app/views/categories/index.html.erb` — a Tailwind table listing each category name with Edit and Delete links; a "New Category" button; show the flash `alert` if present (for restrict_with_error feedback)
+	- [X] T031 [US2] Create `app/views/categories/new.html.erb` — page title "New Category" and render `form` partial
+	- [X] T032 [US2] Create `app/views/categories/edit.html.erb` — page title "Edit Category" and render `form` partial
 
 **Checkpoint**: Signed-in user can create, rename, and list categories. Attempting to delete a category that has transactions shows an error message instead.
 
