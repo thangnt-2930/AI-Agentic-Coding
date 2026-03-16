@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class CreateTransactions < ActiveRecord::Migration[8.0]
+  # rubocop:disable Metrics/MethodLength
   def change
     create_table :transactions do |t|
       t.references :user, null: false, foreign_key: true
@@ -16,4 +17,5 @@ class CreateTransactions < ActiveRecord::Migration[8.0]
     add_index :transactions, :transacted_on
     add_index :transactions, %i[user_id transacted_on]
   end
+  # rubocop:enable Metrics/MethodLength
 end
