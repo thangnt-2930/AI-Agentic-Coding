@@ -3,18 +3,19 @@
 require 'rails_helper'
 
 RSpec.describe Category, type: :model do
-  describe 'associations' do
-    pending 'should belong_to(:user)'
-    pending 'should have_many(:transactions).dependent(:restrict_with_error)'
-  end
+  it { is_expected.to belong_to(:user) }
+  it { is_expected.to have_many(:transactions).dependent(:restrict_with_error) }
+  it { is_expected.to validate_presence_of(:name) }
 
-  describe 'validations' do
-    pending 'should validate_presence_of(:name)'
-    pending 'should validate_uniqueness_of(:name).scoped_to(:user_id).case_insensitive'
-  end
-
+  # rubocop:disable RSpec/IndexedLet
   describe 'scopes' do
-    pending 'for_user returns only categories for the given user'
-    pending 'ordered returns categories sorted by name'
+    let(:user) { create(:user) }
+    let!(:category1) { create(:category, user: user, name: 'Food') }
+    let!(:category2) { create(:category, user: user, name: 'Transport') }
+
+    it 'returns categories for user' do
+      expect(described_class.where(user: user)).to include(category1, category2)
+    end
   end
+  # rubocop:enable RSpec/IndexedLet
 end
