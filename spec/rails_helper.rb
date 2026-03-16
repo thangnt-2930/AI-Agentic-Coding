@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 # Uncomment the line below in case you have `--require rails_helper` in the `.rspec` file
 # that will avoid rails generators crashing because migrations haven't been run yet
 # return unless Rails.env.test?
@@ -35,7 +37,6 @@ rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
 RSpec.configure do |config|
-
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = [
     Rails.root.join('spec/fixtures')
@@ -45,27 +46,6 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
-
-  # FactoryBot methods
-  begin
-    require 'factory_bot_rails'
-    config.include FactoryBot::Syntax::Methods
-  rescue LoadError
-    # FactoryBot not available
-  end
-
-  # Shoulda::Matchers config
-  begin
-    require 'shoulda/matchers'
-    Shoulda::Matchers.configure do |shoulda_config|
-      shoulda_config.integrate do |with|
-        with.test_framework :rspec
-        with.library :rails
-      end
-    end
-  rescue LoadError
-    # Shoulda::Matchers not available
-  end
 
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
