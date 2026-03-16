@@ -16,14 +16,14 @@
 
 **Purpose**: Scaffold the Rails project, install dependencies, and configure tooling.
 
-- [ ] T001 Run `rails new expense_tracker --database=postgresql --css=tailwind` from parent directory to scaffold the project
-- [ ] T002 Edit `Gemfile` — add `devise`, `kaminari` under main gems; add `rspec-rails`, `factory_bot_rails`, `shoulda-matchers` to `group :development, :test`; add `bullet`, `rubocop-rails`, `rubocop-rspec` to `group :development`; add `capybara`, `selenium-webdriver` to `group :test`
-- [ ] T003 Run `bundle install` to install all gems
-- [ ] T004 Run `bundle exec rails generate rspec:install` to initialise RSpec (`spec/spec_helper.rb`, `spec/rails_helper.rb`, `.rspec`)
-- [ ] T005 [P] Edit `spec/rails_helper.rb` — enable `FactoryBot::Syntax::Methods`, configure `Shoulda::Matchers` for RSpec + Rails, set `config.use_transactional_fixtures = true`
-- [ ] T006 [P] Create `.rubocop.yml` at project root — inherit from `rubocop-rails` and `rubocop-rspec`, set `TargetRubyVersion: 3.1`, exclude `db/schema.rb` and `bin/`
-- [ ] T007 [P] Create `docker-compose.yml` at project root with a `db` service using `postgres:16` image, `POSTGRES_DB: expense_tracker_development`, `POSTGRES_USER: expense_tracker`, `POSTGRES_PASSWORD: password`, port mapping `5432:5432`, and named volume `postgres_data`
-- [ ] T008 [P] Edit `config/database.yml` — set `adapter: postgresql`, `host: <%= ENV.fetch("DB_HOST", "localhost") %>`, `port: <%= ENV.fetch("DB_PORT", 5432) %>`, `username: <%= ENV.fetch("DB_USERNAME", "expense_tracker") %>`, `password: <%= ENV.fetch("DB_PASSWORD", "password") %>` in the `default` anchor; set database names `expense_tracker_development`, `expense_tracker_test`, `expense_tracker_production`
+- [X] T001 Run `rails new expense_tracker --database=postgresql --css=tailwind` from parent directory to scaffold the project
+- [X] T002 Edit `Gemfile` — add `devise`, `kaminari` under main gems; add `rspec-rails`, `factory_bot_rails`, `shoulda-matchers` to `group :development, :test`; add `bullet`, `rubocop-rails`, `rubocop-rspec` to `group :development`; add `capybara`, `selenium-webdriver` to `group :test`
+- [X] T003 Run `bundle install` to install all gems
+- [X] T004 Run `bundle exec rails generate rspec:install` to initialise RSpec (`spec/spec_helper.rb`, `spec/rails_helper.rb`, `.rspec`)
+- [X] T005 [P] Edit `spec/rails_helper.rb` — enable `FactoryBot::Syntax::Methods`, configure `Shoulda::Matchers` for RSpec + Rails, set `config.use_transactional_fixtures = true`
+- [X] T006 [P] Create `.rubocop.yml` at project root — inherit from `rubocop-rails` and `rubocop-rspec`, set `TargetRubyVersion: 3.1`, exclude `db/schema.rb` and `bin/`
+- [X] T007 [P] Create `docker-compose.yml` at project root with a `db` service using `postgres:16` image, `POSTGRES_DB: expense_tracker_development`, `POSTGRES_USER: expense_tracker`, `POSTGRES_PASSWORD: password`, port mapping `5432:5432`, and named volume `postgres_data`
+- [X] T008 [P] Edit `config/database.yml` — set `adapter: postgresql`, `host: <%= ENV.fetch("DB_HOST", "localhost") %>`, `port: <%= ENV.fetch("DB_PORT", 5432) %>`, `username: <%= ENV.fetch("DB_USERNAME", "expense_tracker") %>`, `password: <%= ENV.fetch("DB_PASSWORD", "password") %>` in the `default` anchor; set database names `expense_tracker_development`, `expense_tracker_test`, `expense_tracker_production`
 
 ---
 
@@ -33,13 +33,13 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete.
 
-- [ ] T009 Run `docker compose up -d db` to start the PostgreSQL container
-- [ ] T010 Run `bin/rails db:create` to create `expense_tracker_development` and `expense_tracker_test` databases
-- [ ] T011 Run `bin/rails generate devise:install` to install Devise and generate `config/initializers/devise.rb` and locale file
-- [ ] T012 Edit `config/environments/development.rb` — add `config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }` (required by Devise install output); also add Bullet configuration block: `config.after_initialize do Bullet.enable = true; Bullet.rails_logger = true; Bullet.raise = true end`
-- [ ] T013 Run `bin/rails generate devise User` to generate the User model and migration file
-- [ ] T014 Edit the generated `db/migrate/TIMESTAMP_devise_create_users.rb` — ensure `email` column has `null: false, default: ""`, `encrypted_password` has `null: false, default: ""`, and add `add_index :users, :email, unique: true` if not already present
-- [ ] T015 Run `bin/rails db:migrate` to apply the Devise users migration
+- [X] T009 Run `docker compose up -d db` to start the PostgreSQL container
+- [X] T010 Run `bin/rails db:create` to create `expense_tracker_development` and `expense_tracker_test` databases
+- [X] T011 Run `bin/rails generate devise:install` to install Devise and generate `config/initializers/devise.rb` and locale file
+- [X] T012 Edit `config/environments/development.rb` — add `config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }` (required by Devise install output); also add Bullet configuration block: `config.after_initialize do Bullet.enable = true; Bullet.rails_logger = true; Bullet.raise = true end`
+- [X] T013 Run `bin/rails generate devise User` to generate the User model and migration file
+- [X] T014 Edit the generated `db/migrate/TIMESTAMP_devise_create_users.rb` — ensure `email` column has `null: false, default: ""`, `encrypted_password` has `null: false, default: ""`, and add `add_index :users, :email, unique: true` if not already present
+- [X] T015 Run `bin/rails db:migrate` to apply the Devise users migration
 - [ ] T016 Edit `app/models/user.rb` — add `has_many :categories, dependent: :destroy` and `has_many :transactions, dependent: :destroy` below the `devise` macro
 - [ ] T017 Edit `app/controllers/application_controller.rb` — add `before_action :authenticate_user!` so every action requires authentication by default
 - [ ] T018 Edit `config/routes.rb` — add `devise_for :users`; add `authenticated :user do root "dashboard#show", as: :authenticated_root end`; add `root "devise/sessions#new"`

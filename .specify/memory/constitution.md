@@ -43,6 +43,12 @@ decoupled frontend build pipeline.
 All persistent data MUST be defined through ActiveRecord migrations with
 explicit constraints at both the database and model layers.
 
+- Every schema change MUST be introduced through a dedicated Rails migration.
+- Each logical schema modification MUST be implemented in a separate migration file.
+- Direct modification of `schema.rb` or manual database alteration outside
+  Rails migrations is strictly forbidden.
+- Migrations MUST be generated using Rails generators (`rails generate migration`
+  or `rails generate model`) rather than manually creating files.
 - Every migration MUST include `null: false` constraints for required columns
   and appropriate `default:` values where applicable.
 - Models MUST declare `validates` macros that mirror database constraints
