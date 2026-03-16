@@ -1,11 +1,9 @@
-
-inherit_gem:
-	rubocop-rails:
-	rubocop-rspec:
-
+require:
+  - rubocop-rails
+  - rubocop-rspec
 
 AllCops:
-	TargetRubyVersion: 3.1
-	Exclude:
-		- 'db/schema.rb'
-		- 'bin/**/*'
+  TargetRubyVersion: 3.1
+  Exclude:
+    - 'db/schema.rb'
+    - 'bin/**/*'

@@ -174,9 +174,7 @@ maintainability.
   to support future localisation.
 - Secrets and credentials MUST be managed via `config/credentials.yml.enc`;
   no secrets in source code or `.env` files committed to the repository.
-- Test coverage MUST include model validations, scopes, and controller
-  authorization using RSpec + FactoryBot; system specs (Capybara) for
-  critical user flows (create transaction, view dashboard, export CSV).
+- Automated testing requirements are defined in Testing Strategy. All code MUST comply with the testing standards described there.
 
 **Rationale**: Uniform conventions lower the onboarding cost for new
 developers and make code review predictable.
@@ -263,5 +261,21 @@ For every task defined in `tasks.md`, the following workflow MUST be followed:
 - [ ] 9. Wait for review and merge approval
 
 **Rule**: The next task MUST NOT be started until the previous task's Pull Request has been merged into `main`.
+
+## Testing Strategy (NON-NEGOTIABLE)
+- Tests MUST be written using RSpec.
+
+- Test coverage MUST include:
+- Model validations
+- Model associations
+- Important scopes
+
+- Controller specs SHOULD test:
+- Successful create/update/delete actions
+- Basic failure cases
+
+- FactoryBot MUST be used for generating test data.
+
+- System specs (Capybara) are OPTIONAL for this demo project.
 
 **Version**: 1.0.0 | **Ratified**: 2026-03-13 | **Last Amended**: 2026-03-13
