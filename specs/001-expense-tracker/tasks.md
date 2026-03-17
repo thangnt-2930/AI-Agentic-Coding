@@ -40,10 +40,10 @@
 - [X] T013 Run `bin/rails generate devise User` to generate the User model and migration file
 - [X] T014 If the generated `db/migrate/TIMESTAMP_devise_create_users.rb` is missing constraints or indexes, create a new migration to add `null: false, default: ""` to `email` and `encrypted_password`, and add `add_index :users, :email, unique: true`.
 - [X] T015 Run `bin/rails db:migrate` to apply the Devise users migration
-- [ ] T016 Edit `app/models/user.rb` — add `has_many :categories, dependent: :destroy` and `has_many :transactions, dependent: :destroy` below the `devise` macro
-- [ ] T017 Edit `app/controllers/application_controller.rb` — add `before_action :authenticate_user!` so every action requires authentication by default
-- [ ] T018 Edit `config/routes.rb` — add `devise_for :users`; add `authenticated :user do root "dashboard#show", as: :authenticated_root end`; add `root "devise/sessions#new"`
-- [ ] T019 Run `bin/rails generate devise:views` to generate Devise view templates, then delete all generated subdirectories except `devise/sessions/` and `devise/registrations/`
+- [X] T016 Edit `app/models/user.rb` — add `has_many :categories, dependent: :destroy` and `has_many :transactions, dependent: :destroy` below the `devise` macro
+- [X] T017 Edit `app/controllers/application_controller.rb` — add `before_action :authenticate_user!` so every action requires authentication by default
+- [X] T018 Edit `config/routes.rb` — add `devise_for :users`; add `authenticated :user do root "dashboard#show", as: :authenticated_root end`; add `root "devise/sessions#new"`
+- [X] T019 Run `bin/rails generate devise:views` to generate Devise view templates, then delete all generated subdirectories except `devise/sessions/` and `devise/registrations/`
 
 **Checkpoint**: `bin/rails server` starts; visiting `/` redirects to sign-in; sign-up and sign-in flows work end-to-end.
 
@@ -55,9 +55,9 @@
 
 **Independent Test**: Register a new account → sign in → verify dashboard is accessible → sign out → verify `/transactions` redirects to sign-in.
 
-- [ ] T020 [US1] Edit `app/views/layouts/application.html.erb` — replace the default boilerplate with a full HTML5 layout that includes the Tailwind CDN/stylesheet link, a `<nav>` bar with links to Dashboard, Transactions, Categories, and a "Sign out" button (visible only when `user_signed_in?`), a flash message block, and `<%= yield %>`
-- [ ] T021 [US1] Edit `app/views/devise/sessions/new.html.erb` — replace generated content with a centred Tailwind card containing an email field, a password field, a "Sign in" submit button, and a link to the sign-up page
-- [ ] T022 [US1] Edit `app/views/devise/registrations/new.html.erb` — replace generated content with a centred Tailwind card containing an email field, password field, password-confirmation field, a "Create account" submit button, and a link to the sign-in page
+- [X] T020 [US1] Edit `app/views/layouts/application.html.erb` — replace the default boilerplate with a full HTML5 layout that includes the Tailwind CDN/stylesheet link, a `<nav>` bar with links to Dashboard, Transactions, Categories, and a "Sign out" button (visible only when `user_signed_in?`), a flash message block, and `<%= yield %>`
+- [X] T021 [US1] Edit `app/views/devise/sessions/new.html.erb` — replace generated content with a centred Tailwind card containing an email field, a password field, a "Sign in" submit button, and a link to the sign-up page
+- [X] T022 [US1] Edit `app/views/devise/registrations/new.html.erb` — replace generated content with a centred Tailwind card containing an email field, password field, password-confirmation field, a "Create account" submit button, and a link to the sign-in page
 
 **Checkpoint**: New user can register, sign in, see the (empty) root, and sign out. Unauthenticated `/transactions` redirects to sign-in.
 
